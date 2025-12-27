@@ -1,0 +1,40 @@
+<div th:fragment="content">
+
+    <h3 class="mb-3">Form User</h3>
+
+    <form action="/admin/users/simpan" method="post">
+
+        <input type="hidden" name="id_pengguna" th:value="${user.id_pengguna}"/>
+
+        <div class="mb-3">
+            <label>Nama</label>
+            <input type="text" name="nama" class="form-control"
+                   th:value="${user.nama}" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control"
+                   th:value="${user.username}" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="text" name="password" class="form-control"
+                   th:value="${user.password}" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Role</label>
+            <select name="role" class="form-select">
+                <option value="Admin" th:selected="${user.role=='Admin'}">Admin</option>
+                <option value="Mekanik" th:selected="${user.role=='Mekanik'}">Mekanik</option>
+                <option value="Asisten" th:selected="${user.role=='Asisten'}">Asisten</option>                
+            </select>
+        </div>
+
+        <button class="btn btn-success">Simpan</button>
+        <a href="/admin/users" class="btn btn-secondary">Batal</a>
+    </form>
+
+</div>
