@@ -1,0 +1,51 @@
+<div th:fragment="content">
+
+    <h3 th:text="${kerusakan.id_kerusakan == null ? 'Tambah Kerusakan' : 'Edit Kerusakan'}"></h3>
+
+    <form method="post" action="/kerusakan/simpan">
+
+        <input type="hidden" name="id_kerusakan"
+               th:value="${kerusakan.id_kerusakan}">
+
+        <div class="mb-3">
+            <label class="form-label">Nama Kerusakan</label>
+            <input class="form-control"
+                   name="nama_kerusakan"
+                   th:value="${kerusakan.nama_kerusakan}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Deskripsi</label>
+            <textarea class="form-control"
+                      name="deskripsi"
+                      rows="3"
+                      th:text="${kerusakan.deskripsi}"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Solusi</label>
+            <textarea class="form-control"
+                      name="solusi"
+                      rows="3"
+                      th:text="${kerusakan.solusi}"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Gejala</label>
+            <div class="form-check"
+                 th:each="g : ${listGejala}">
+                <input class="form-check-input"
+                       type="checkbox"
+                       name="gejalaIds"
+                       th:value="${g.id_gejala}"
+                       th:checked="${kerusakan.gejalaList != null and kerusakan.gejalaList.contains(g)}">
+                <label class="form-check-label"
+                       th:text="${g.nama_gejala}"></label>
+            </div>
+        </div>
+
+        <button class="btn btn-primary">Simpan</button>
+        <a href="/kerusakan" class="btn btn-secondary">Kembali</a>
+
+    </form>
+</div>

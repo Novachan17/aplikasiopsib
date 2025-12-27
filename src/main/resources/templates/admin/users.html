@@ -1,0 +1,43 @@
+<div th:fragment="content">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">Kelola User</h3>
+
+            <div>
+                <a href="/admin/users/tambah" class="btn btn-success">+ Tambah User</a>
+            </div>
+        </div>
+
+    <table class="table table-bordered bg-white text-center">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th width="160">Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.id_pengguna}"></td>
+            <td th:text="${u.nama}"></td>
+            <td th:text="${u.username}"></td>
+            <td>
+                <span class="badge bg-info text-dark" th:text="${u.role}"></span>
+            </td>
+            <td>
+                <a th:href="@{/admin/users/edit/{id}(id=${u.id_pengguna})}"
+                   class="btn btn-sm btn-warning">Edit</a>
+
+                <a th:href="@{/admin/users/hapus/{id}(id=${u.id_pengguna})}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Hapus user ini?')">
+                    Hapus
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
