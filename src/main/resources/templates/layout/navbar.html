@@ -1,5 +1,5 @@
 <div th:fragment="navbar">
-    <nav class="top-navbar d-flex align-items-center">
+    <nav class="top-navbar">
 
         <!-- BRAND -->
         <div class="brand">
@@ -10,26 +10,19 @@
             </div>
         </div>
 
-        <!-- RIGHT AREA -->
-        <div class="ms-auto d-flex align-items-center gap-2">
+        <!-- USER INFO -->
+        <div class="user-info">
 
-            <!-- USER INFO -->
+            <!-- INTERNAL USER -->
             <span th:if="${session.user != null}">
                 Halo, <b th:text="${session.user.nama}">User</b>
             </span>
 
+            <!-- GUEST USER -->
             <span th:if="${session.user == null and session.role == 'guest'}">
                 Halo, <b th:text="${session.guestName}">Pengunjung</b>
             </span>
 
-            <!-- LOGOUT (MOBILE ONLY) -->
-            <a href="/logout"
-               class="btn btn-outline-danger btn-sm d-lg-none">
-                <i class="bi bi-box-arrow-right"></i>
-                Logout
-            </a>
-
-            <!-- TOGGLE SIDEBAR -->
             <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
         </div>
 
