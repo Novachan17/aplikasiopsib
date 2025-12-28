@@ -17,20 +17,31 @@
             <a href="/riwayat-konsultasi" class="btn btn-outline-primary">Lihat Riwayat</a>
         </div>
 
-        <div class="menu-card">
+       <!-- ===== ADMIN ONLY : BASIS PENGETAHUAN ===== -->
+        <div class="menu-card"
+             th:if="${session.user != null 
+                     and #strings.equalsIgnoreCase(session.user.role,'admin')}">
+        
             <h5>Basis Pengetahuan</h5>
             <p>Kelola data gejala & kerusakan.</p>
+        
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                     Kelola Data
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/gejala">Data Gejala</a></li>
-                    <li><a class="dropdown-item" href="/kerusakan">Data Kerusakan</a></li>
+                    <li>
+                        <a class="dropdown-item" href="/gejala">Data Gejala</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/kerusakan">Data Kerusakan</a>
+                    </li>
                 </ul>
             </div>
         </div>
 
+
     </div>
 </div>
+
 
