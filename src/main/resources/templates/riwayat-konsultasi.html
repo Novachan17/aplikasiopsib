@@ -2,8 +2,21 @@
 
     <h3 class="mb-3">Riwayat Konsultasi</h3>
 
-    <input type="text" class="form-control mb-3"
-           placeholder="Cari data..." id="searchRiwayat">
+        <!-- SEARCH -->
+        <form method="get" action="/riwayat-konsultasi">
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text"
+                       id="search"
+                       name="keyword"
+                       class="form-control"
+                       placeholder="Cari berdasarkan ID..."
+                       th:value="${keyword}">
+            </div>
+        </form>
+    </div>
 
     <table class="table table-bordered">
         <thead>
@@ -32,3 +45,4 @@
     </table>
 
 </div>
+
