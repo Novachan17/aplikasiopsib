@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RiwayatKonsultasiController {
@@ -19,7 +20,10 @@ public class RiwayatKonsultasiController {
     }
 
     @GetMapping("/riwayat-konsultasi")
-    public String riwayat(Model model, HttpSession session) {
+    public String riwayat(
+            @RequestParam(required = false) String keyword,
+            Model model,
+            HttpSession session) {
 
         if (!isLogin(session)) {
             return "redirect:/login";
@@ -29,8 +33,18 @@ public class RiwayatKonsultasiController {
         model.addAttribute("content", "riwayat-konsultasi");
         model.addAttribute("activeMenu", "riwayat");
 
-        // AMAN: Hibernate hanya SELECT kolom yang ADA
-        model.addAttribute("list", konsultasiRepository.findAll());
+        // 🔍 LOGIKA SEARCH
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            model.addAttribute(
+                    "list",
+                    konsultasiRepository
+                            .findByIdKonsultasiContainingIgnoreCase(keyword));
+        } else {
+            model.addAttribute("list", konsultasiRepository.findAll());
+        }
+
+        // supaya value input tidak hilang
+        model.addAttribute("keyword", keyword);
 
         return "layout/main";
     }
