@@ -1,6 +1,13 @@
 function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('collapsed');
-    document.querySelector('.main-content').classList.toggle('collapsed');
+    const sidebar = document.querySelector('.sidebar');
+    const main = document.querySelector('.main-content');
+
+    sidebar.classList.toggle('collapsed');
+
+    // HANYA desktop (>= 992px)
+    if (window.innerWidth >= 992) {
+        main.classList.toggle('collapsed');
+    }
 }
 
 // AUTO SEARCH
@@ -43,4 +50,5 @@ document.addEventListener("DOMContentLoaded", function () {
             btn.disabled = !checked;
         }
     });
+
 
